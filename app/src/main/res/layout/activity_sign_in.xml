@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="sign in"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black"
+            />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="sign in"
+                    android:textColor="@color/always_white"
+                    android:textAllCaps="false"
+                    app:backgroundTint="@color/gr_top"
+                    />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/sign_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:text="sing up"
+                    android:textColor="@color/solid"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="6dp"
+                    />
+
+            </LinearLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_account"
+                app:startIconTint="@color/solid"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="username"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/ic_key"
+                app:startIconTint="@color/solid"
+                app:endIconMode="password_toggle"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="password"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/remember"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="remember me"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/forgot_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="forgot password"
+                    app:tvFont="medium"
+                    android:textColor="@color/solid"
+                    />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="22dp"
+                android:text="sign in"
+                android:padding="12dp"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/gr_top"
+                android:textColor="@color/always_white"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="or"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                />
+
+           <LinearLayout
+               android:visibility="gone"
+               android:gravity="center"
+               android:layout_marginTop="16dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <View
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   />
+
+               <com.google.android.material.card.MaterialCardView
+                   android:layout_width="100dp"
+                   android:layout_height="wrap_content"
+                   app:strokeColor="@color/black"
+                   app:strokeWidth="1dp"
+                   >
+                    <ImageView
+                        android:padding="12dp"
+                        android:layout_gravity="center"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/google"
+                        />
+               </com.google.android.material.card.MaterialCardView>
+
+               <View
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   />
+
+               <com.google.android.material.card.MaterialCardView
+                   android:layout_width="100dp"
+                   android:layout_height="wrap_content"
+                   app:strokeColor="@color/black"
+                   app:strokeWidth="1dp"
+                   >
+                   <ImageView
+                       android:padding="12dp"
+                       android:layout_gravity="center"
+                       android:layout_width="60dp"
+                       android:layout_height="60dp"
+                       android:src="@drawable/apple"
+                       />
+               </com.google.android.material.card.MaterialCardView>
+               <View
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   />
+
+           </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/register"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="22dp"
+                android:text="no account"
+                app:tvFont="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</RelativeLayout>
