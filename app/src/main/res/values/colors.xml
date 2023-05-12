@@ -5,6 +5,30 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
+    <color name="primary">#15872E</color>
+    <color name="error">#ED1F1F</color>
+    <color name="dark">#374957</color>
+    <color name="solid">#747474</color>
+    <color name="red">#ED1F1F</color>
+    <color name="gr_top">#1FB81C</color>
+    <color name="gr_bottom">#0000FE93</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background">#FFFFFF</color>
+    <color name="transparent_bg">#80000000</color>
+    <color name="passive_text">#5F5B5B</color>
+    <color name="always_white">#FFFFFF</color>
+    <color name="always_black">#000000</color>
+    <color name="orange">#F67A06</color>
+    <color name="vip">#99FFD600</color>
+    <color name="gray">#D9D9D9</color>
+    <color name="black_p50">#7f000000</color>
+    <color name="filled_input">#08000000</color>
+    <color name="trr">#F3FBF4</color>
+    <color name="accordion">#F9FAFC</color>
+    <color name="colorOverlay">#2C000000</color>
+    <color name="stroke">#C4C4C4</color>
+    <color name="primary_2">#0EC243</color>
+    <color name="tab_text">#AAAAAA</color>
 </resources>
