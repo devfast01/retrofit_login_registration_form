@@ -1,8 +1,8 @@
 package com.example.retrofit_log_reg_form;
 
 import static android.provider.ContactsContract.Intents.Insert.EMAIL;
-import static com.example.retrofit_log_reg_form.LoginActivity.FNAME;
-import static com.example.retrofit_log_reg_form.LoginActivity.LNAME;
+import static com.example.retrofit_log_reg_form.LoginActivity.USERNAME;
+import static com.example.retrofit_log_reg_form.LoginActivity.PHONENUMBER;
 import static com.example.retrofit_log_reg_form.LoginActivity.SHARED_PREFERENCES_NAME;
 import static com.example.retrofit_log_reg_form.LoginActivity.USER_ID;
 
@@ -32,8 +32,8 @@ public class HomeScreen extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         str_userid = sharedPreferences.getString(USER_ID, "");
-        str_fname = sharedPreferences.getString(FNAME, "");
-        str_lname = sharedPreferences.getString(LNAME, "");
+        str_fname = sharedPreferences.getString(USERNAME, "");
+        str_lname = sharedPreferences.getString(PHONENUMBER, "");
         str_email = sharedPreferences.getString(EMAIL, "");
 
         text_userid = (TextView) findViewById(R.id.user_id);

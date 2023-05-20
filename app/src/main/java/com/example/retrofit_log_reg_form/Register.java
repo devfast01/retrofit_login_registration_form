@@ -1,13 +1,19 @@
 package com.example.retrofit_log_reg_form;
 
-import static com.demo.loginregisterretrofit.Response.API.BaseURL;
+
+import static com.example.retrofit_log_reg_form.API.BaseURL;
+import static com.example.retrofit_log_reg_form.LoginActivity.SHARED_PREFERENCES_NAME;
+import static com.example.retrofit_log_reg_form.LoginActivity.USER_ID;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,10 +25,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.demo.loginregisterretrofit.Response.RegsiterResponse;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
@@ -34,15 +41,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class Register extends AppCompatActivity {
-    private EditText et_fname, et_lname, et_email, etpassword;
+    private EditText et_username, et_phone, et_email, et_password;
     private FloatingActionButton btnregister;
     private TextView tvlogin;
-    String firstName;
-    String lastName;
+    String username;
+    String phoneNumber;
     String email;
     String password;
-    LinearLayout lyt_linear;
-    ImageView u_image;
+    public static final String USER_ID = "user_id";
+    public static final String EMAIL = "email";
+    public static final String PASSWORD = "password";
+    public static final String USER_NAME = "username";
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     Pattern pattern_pwd = Pattern.compile("^[a-zA-Z0-9]+$");
 
     public Register() {
@@ -54,67 +65,43 @@ public class Register extends AppCompatActivity {
         setStatusBarGradiant(this);
         setContentView(R.layout.activity_register);
 
-        et_fname = (EditText) findViewById(R.id.et_fname);
-        et_lname = (EditText) findViewById(R.id.et_lname);
-        et_email = (EditText) findViewById(R.id.et_email);
-        etpassword = (EditText) findViewById(R.id.etpassword);
-        btnregister = findViewById(R.id.btn);
-        u_image = findViewById(R.id.u_image);
-        lyt_linear = findViewById(R.id.lyt_linear);
-        tvlogin = (TextView) findViewById(R.id.tvlogin);
-
-        tvlogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Register.this, LoginActivity.class);
-                startActivity(intent);
-                Register.this.finish();
-            }
-        });
-        u_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Register.this, LoginActivity.class);
-                startActivity(intent);
-                Register.this.finish();
-            }
-        });
+        et_username = (EditText) findViewById(R.id.username);
+        et_email = (EditText) findViewById(R.id.email_adr);
+        et_phone = (EditText) findViewById(R.id.phone);
+        et_password = (EditText) findViewById(R.id.password);
+        btnregister = findViewById(R.id.ok);
 
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firstName = et_fname.getText().toString();
-                lastName = et_lname.getText().toString();
+                username = et_username.getText().toString();
                 email = et_email.getText().toString();
-                password = etpassword.getText().toString();
+                phoneNumber = et_phone.getText().toString();
+                password = et_password.getText().toString();
 
                 Log.d("userdata", "onClick: " + email + password);
                 registerMe();
                 //ata mla sang kai karu mla response blank yet ahi
                 //response server ka bata pehle
-//                if (!firstName.isEmpty()) {
-//                    if (!lastName.isEmpty()) {
-//                        if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//
-//                            if (!password.isEmpty() && pattern_pwd.matcher(password).matches()) {
-//
-//                            } else {
-//                                Snackbar.make(lyt_linear, "Enter the Valid Password", Snackbar.LENGTH_SHORT).show();
-//
-//                            }
-//                        } else {
-//                            Snackbar.make(lyt_linear, "Enter the Valid Email", Snackbar.LENGTH_SHORT).show();
-//
-//                        }
-//                    } else {
-//                        Snackbar.make(lyt_linear, "Enter the Valid Last name", Snackbar.LENGTH_SHORT).show();
-//
-//                    }
-//                } else {
-//                    Snackbar.make(lyt_linear, "Enter the Valid First name", Snackbar.LENGTH_SHORT).show();
-//
-//                }
+                if (!username.isEmpty()) {
+                    if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                        if (!email.isEmpty() && Patterns.PHONE.matcher(phoneNumber).matches()) {
 
+                            if (!password.isEmpty() && pattern_pwd.matcher(password).matches()) {
+
+                            } else {
+                                Toast.makeText(Register.this, "Enter the Valid Password", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(Register.this, "Enter the Valid Phone Number ", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(Register.this, "Enter the Valid Email", Toast.LENGTH_SHORT).show();
+
+                    }
+                } else {
+                    Toast.makeText(Register.this, "Enter the Valid username", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -137,7 +124,7 @@ public class Register extends AppCompatActivity {
                 .build();
 
         API api = retrofit.create(API.class);
-        Call<RegsiterResponse> call = api.getUserRegi(firstName, lastName, email, password);
+        Call<RegsiterResponse> call = api.getUserRegi(username, email, phoneNumber, password);
         call.enqueue(new Callback<RegsiterResponse>() {
             @Override
             public void onResponse(Call<RegsiterResponse> call, Response<RegsiterResponse> response) {
@@ -191,10 +178,9 @@ public class Register extends AppCompatActivity {
 //                    sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
 //                    editor = sharedPreferences.edit();
 //                    editor.putString(USER_ID, dataobj.getString("user_id"));
-//                    editor.putString(NAME, dataobj.getString("name"));
-//                    editor.putString(HOBBY, dataobj.getString("hobby"));
-//                    editor.putString(PASSWORD, dataobj.getString("password"));
 //                    editor.putString(USER_NAME, dataobj.getString("username"));
+//                    editor.putString(EMAIL, dataobj.getString("email"));
+//                    editor.putString(PASSWORD, dataobj.getString("password"));
 //                    editor.apply();
 //                    Log.d("kon", "saveInfo: " + USER_NAME);
 //

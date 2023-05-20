@@ -3,7 +3,7 @@ package com.example.retrofit_log_reg_form;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Loginresponse {
+public class UpdateResponse {
     @SerializedName("user_id")
     @Expose()
     public String user_id;
@@ -11,11 +11,11 @@ public class Loginresponse {
 
     @SerializedName("first_name")
     @Expose()
-    public String username;
+    public String first_name;
 
     @SerializedName("last_name")
     @Expose()
-    public String phoneNumber;
+    public String last_name;
 
     @SerializedName("email")
     @Expose()
@@ -28,11 +28,11 @@ public class Loginresponse {
 
 
     public String getFirst_name() {
-        return username;
+        return first_name;
     }
 
     public String getLast_name() {
-        return phoneNumber;
+        return last_name;
     }
 
     public String getUser_id() {

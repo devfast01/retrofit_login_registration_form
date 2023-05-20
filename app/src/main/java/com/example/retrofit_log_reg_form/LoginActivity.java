@@ -32,15 +32,15 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText etUname, etPass;
+    private EditText edt_username, etPass;
     private Button btnlogin, btnSingUp;
     private TextView tvreg, skip_txt;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     public static final String SHARED_PREFERENCES_NAME = "login_portal";
     public static final String USER_ID = "user_id";
-    public static final String FNAME = "fname";
-    public static final String LNAME = "lname";
+    public static final String USERNAME = "username";
+    public static final String PHONENUMBER = "phoneNumber";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     private View parent_view;
@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     RelativeLayout rl_pwd;
     LinearLayout ll_lay;
     Pattern pattern_pwd = Pattern.compile("^[a-zA-Z0-9]+$");
-    public static String userid = "", userfname = "", userlname = "", useremail = "";
+    public static String userid = "", username = "", phoneNumber = "", useremail = "";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         final boolean firstStart = prefs.getBoolean("firstStart", true);
 
-        etUname = (EditText) findViewById(R.id.username);
+        edt_username = (EditText) findViewById(R.id.username);
         etPass = (EditText) findViewById(R.id.password);
         btnlogin = (Button) findViewById(R.id.sing_in);
         btnSingUp = (Button) findViewById(R.id.sign_up);
@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email = etUname.getText().toString().trim();
+                email = edt_username.getText().toString().trim();
                 password = etPass.getText().toString().trim();
 
                 Log.d("userdata", "onClick: " + email + password);
@@ -117,8 +117,8 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i("onSuccess", response.body().loginresponse.getEmail());
                         userid = response.body().loginresponse.user_id;
                         useremail = response.body().loginresponse.email;
-                        userfname = response.body().loginresponse.first_name;
-                        userlname = response.body().loginresponse.last_name;
+                        username = response.body().loginresponse.username;
+                        phoneNumber = response.body().loginresponse.phoneNumber;
 
                         try {
                             parseLoginData();
@@ -175,8 +175,8 @@ public class LoginActivity extends AppCompatActivity {
                 sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
                 editor = sharedPreferences.edit();
                 editor.putString(USER_ID, userid);
-                editor.putString(FNAME, userfname);
-                editor.putString(LNAME, userlname);
+                editor.putString(USERNAME, username);
+                editor.putString(PHONENUMBER, phoneNumber);
                 editor.putString(EMAIL, useremail);
                 editor.apply();
 
