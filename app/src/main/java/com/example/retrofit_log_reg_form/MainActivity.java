@@ -24,9 +24,11 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         user_id = sharedPreferences.getString(USER_ID, "");
 
+        checkData();
+
     }
 
-    public void load() {
+    public void checkData() {
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

@@ -1,10 +1,21 @@
 package com.example.retrofit_log_reg_form;
 
+import static android.provider.ContactsContract.Intents.Insert.EMAIL;
+import static com.example.retrofit_log_reg_form.LoginActivity.FNAME;
+import static com.example.retrofit_log_reg_form.LoginActivity.LNAME;
+import static com.example.retrofit_log_reg_form.LoginActivity.SHARED_PREFERENCES_NAME;
+import static com.example.retrofit_log_reg_form.LoginActivity.USER_ID;
+
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeScreen extends AppCompatActivity {
@@ -19,5 +30,65 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
+        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        str_userid = sharedPreferences.getString(USER_ID, "");
+        str_fname = sharedPreferences.getString(FNAME, "");
+        str_lname = sharedPreferences.getString(LNAME, "");
+        str_email = sharedPreferences.getString(EMAIL, "");
+
+        text_userid = (TextView) findViewById(R.id.user_id);
+        text_email = (TextView) findViewById(R.id.user_email);
+        text_fname = (TextView) findViewById(R.id.user_fname);
+        text_lname = (TextView) findViewById(R.id.user_lname);
+        logout = findViewById(R.id.logout_btn);
+        edit = findViewById(R.id.edit);
+
+        text_userid.setText("UserId: " + str_userid);
+        text_email.setText("Email: " + str_email);
+        text_fname.setText("First Name: " + str_fname);
+        text_lname.setText("Last Name:  " + str_lname);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), UpdateActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+    private void logout() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle(R.string.confirmation);
+        dialog.setMessage(R.string.logout_confirmation_text);
+        dialog.setNegativeButton(R.string.CANCEL, null);
+        dialog.setPositiveButton(R.string.YES, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                SessionOut();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.show();
+
+    }
+
+    private void SessionOut() {
+        SharedPreferences sharedpreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.apply();
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        finish();
+        startActivity(intent);
+    }
+
 }
