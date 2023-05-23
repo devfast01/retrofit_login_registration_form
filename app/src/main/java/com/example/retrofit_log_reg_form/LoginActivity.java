@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStatusBarGradiant(this);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_login);
 
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         final boolean firstStart = prefs.getBoolean("firstStart", true);
